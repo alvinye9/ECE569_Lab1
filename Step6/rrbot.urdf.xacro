@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="rrbot">
+
+  <!-- Use this if parameters are set from the launch file, otherwise delete -->
+  <xacro:arg name="prefix" default="" />
+
+  <xacro:include filename="$(find rrbot_description)/urdf/rrbot/rrbot_macro.xacro"/>
+  <xacro:include filename="$(find rrbot_description)/urdf/common/inertials.xacro" />
+  <xacro:include filename="$(find rrbot_description)/urdf/common/materials.xacro" />
+
+  <!-- create link fixed to the "world" -->
+  <link name="world" />
+
+  <!-- Load robot's macro with parameters -->
+  <!-- set prefix if multiple robots are used -->
+  <xacro:rrbot prefix="$(arg prefix)" parent="world" >
+    <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
+  </xacro:rrbot>
+
+</robot>
