@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Macro for creating a leg -->
+  <xacro:macro name="leg" params="name">
+    <link name="${name}">
+      <visual>
+        <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0" />
+        <geometry>
+          <cylinder length="${leg_length}" radius="${leg_radius}" />
+        </geometry>
+        <material name="light_grey" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0" />
+        <geometry>
+          <cylinder length="${leg_length}" radius="${leg_radius}" />
+        </geometry>
+      </collision>
+
+      <xacro:cylinder_inertial radius="${leg_radius}" length="${leg_length}" mass="${leg_mass}">
+        <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0" />
+      </xacro:cylinder_inertial>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="table" params="parent *origin">
+
+    <!-- Constants for Table and Legs -->
+    <xacro:property name="table_length" value="2" />
+    <xacro:property name="table_width" value="1" />
+    <xacro:property name="table_height" value="1" />
+    <xacro:property name="table_thickness" value="0.05" />
+    <xacro:property name="wood_density" value="800" />
+    <xacro:property name="table_mass" value="${table_length * table_width * table_thickness * wood_density}" />
+    <xacro:property name="leg_length" value="${table_height - table_thickness}" />
+    <xacro:property name="leg_radius" value="0.05" />
+    <xacro:property name="aluminum_density" value="2700" />
+    <xacro:property name="leg_mass" value="${pi*leg_radius*leg_radius*leg_length*aluminum_density}" />
+
+    <!-- create four legs -->
+    <xacro:leg name="leg1" />
+    <xacro:leg name="leg2" />
+    <xacro:leg name="leg3" />
+    <xacro:leg name="leg4" />
+
+    <!-- Attach the legs to the table_top using fixed joints -->
+    <joint name="leg1_joint" type="fixed">
+      <parent link="table_top" />
+      <child link="leg1" />
+      <origin xyz="${table_length/2 - leg_radius} ${table_width/2 - leg_radius} ${-table_thickness}" rpy="0 0 0" />
+    </joint>
+    
+    <joint name="leg2_joint" type="fixed">
+      <parent link="table_top" />
+      <child link="leg2" />
+      <origin xyz="${-table_length/2 + leg_radius} ${table_width/2 - leg_radius} ${-table_thickness}" rpy="0 0 0" />
+    </joint>
+
+    <joint name="leg3_joint" type="fixed">
+      <parent link="table_top" />
+      <child link="leg3" />
+      <origin xyz="${-table_length/2 + leg_radius} ${-table_width/2 + leg_radius} ${-table_thickness}" rpy="0 0 0" />
+    </joint>
+
+    <joint name="leg4_joint" type="fixed">
+      <parent link="table_top" />
+      <child link="leg4" />
+      <origin xyz="${table_length/2 - leg_radius} ${-table_width/2 + leg_radius} ${-table_thickness}" rpy="0 0 0" />
+    </joint>
+
+    <!-- Table top joint -->
+    <joint name="table_top_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link="table_top" />
+      <origin xyz="0 0 ${table_height + table_thickness}" rpy="0 0 0" />
+    </joint>
+
+
+  <!-- Base Link, Table Top -->
+    <link name="table_top">
+      <collision>
+        <origin xyz="0 0 ${-table_thickness/2}" rpy="0 0 0" />
+        <geometry>
+          <box size="${table_length} ${table_width} ${table_thickness}" />
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 ${-table_thickness/2}" rpy="0 0 0" />
+        <geometry>
+          <box size="${table_length} ${table_width} ${table_thickness}" />
+        </geometry>
+        <material name="brown" />
+      </visual>
+
+      <xacro:box_inertial x="${table_width}" y="${table_length}" z="${table_thickness}" mass="${table_mass}">
+        <origin xyz="0 0 ${table_thickness / 2}" rpy="0 0 0" />
+      </xacro:box_inertial>
+    </link>
+
+
+
+
+  </xacro:macro>
+
+</robot>
