@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="table">
+
+  <xacro:arg name="prefix" default="" />
+
+  <xacro:include filename="$(find table_description)/urdf/table/table_macro.xacro"/>
+  <xacro:include filename="$(find table_description)/urdf/common/inertials.xacro" />
+  <xacro:include filename="$(find table_description)/urdf/common/materials.xacro" />
+
+  <!-- create link fixed to the "world" -->
+  <link name="world" />
+
+  <!-- run table macro with parameters -->
+  <xacro:table prefix="$(arg prefix)" parent="world" >
+    <origin xyz="0 0 0" rpy="0 0 0" />   <!-- position robot in the world -->
+  </xacro:table>
+
+</robot>
