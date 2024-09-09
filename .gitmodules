@@ -1,4 +1,4 @@
-[submodule "ws1/Universal_Robots_ROS2_Description"]
-	path = ws1/Universal_Robots_ROS2_Description
+[submodule "ws1/src/Universal_Robots_ROS2_Description"]
+	path = ws1/src/Universal_Robots_ROS2_Description
 	url = git@github.com:UniversalRobots/Universal_Robots_ROS2_Description.git
 	branch = humble
