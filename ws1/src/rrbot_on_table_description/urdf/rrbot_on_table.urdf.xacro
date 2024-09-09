@@ -6,8 +6,10 @@
 
   <xacro:include filename="$(find rrbot_on_table_description)/urdf/common/inertials.xacro"/>
   <xacro:include filename="$(find rrbot_on_table_description)/urdf/common/materials.xacro"/>
-  <xacro:include filename="$(find rrbot_description)/urdf/rrbot/rrbot_macro.xacro"/>
   <xacro:include filename="$(find table_description)/urdf/table/table_macro.xacro"/>
+  <xacro:include filename="$(find rrbot_description)/urdf/rrbot/rrbot_macro.xacro"/>
+
+  <xacro:arg name="table_prefix" default="table_" />
 
 
   <!-- create link fixed to the "world" -->
@@ -15,12 +17,13 @@
 
   <!-- Load robot's macro with parameters -->
   <!-- set prefix if multiple robots are used -->
-  <xacro:table prefix="table_" parent="world" >
+  <xacro:table prefix="$(arg table_prefix)" parent="world" >
     <origin xyz="0 0 1" rpy="0 0 0" />          <!-- position robot in the world -->
   </xacro:table>
 
-  <xacro:rrbot prefix="rrbot_" parent="table_top" >
+  <xacro:rrbot prefix="rrbot_" parent="$(arg table_prefix)table_top" >
     <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
   </xacro:rrbot>
+
 
 </robot>

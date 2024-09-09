@@ -46,33 +46,33 @@
 
     <!-- Attach the legs to the table_top using fixed joints -->
     <joint name="${prefix}leg1_joint" type="fixed">
-      <parent link="table_top" />
-      <child link="leg1" />
+      <parent link="${prefix}table_top" />
+      <child link="${prefix}leg1" />
       <origin xyz="${table_length/2 - leg_radius} ${table_width/2 - leg_radius} ${-table_thickness}" rpy="0 0 0" />
     </joint>
     
     <joint name="${prefix}leg2_joint" type="fixed">
-      <parent link="table_top" />
-      <child link="leg2" />
+      <parent link="${prefix}table_top" />
+      <child link="${prefix}leg2" />
       <origin xyz="${-table_length/2 + leg_radius} ${table_width/2 - leg_radius} ${-table_thickness}" rpy="0 0 0" />
     </joint>
 
     <joint name="${prefix}leg3_joint" type="fixed">
-      <parent link="table_top" />
-      <child link="leg3" />
+      <parent link="${prefix}table_top" />
+      <child link="${prefix}leg3" />
       <origin xyz="${-table_length/2 + leg_radius} ${-table_width/2 + leg_radius} ${-table_thickness}" rpy="0 0 0" />
     </joint>
 
     <joint name="${prefix}leg4_joint" type="fixed">
-      <parent link="table_top" />
-      <child link="leg4" />
+      <parent link="${prefix}table_top" />
+      <child link="${prefix}leg4" />
       <origin xyz="${table_length/2 - leg_radius} ${-table_width/2 + leg_radius} ${-table_thickness}" rpy="0 0 0" />
     </joint>
 
     <!-- Table top joint -->
     <joint name="${prefix}table_top_joint" type="fixed">
       <parent link="${parent}" />
-      <child link="table_top" />
+      <child link="${prefix}table_top" />
       <origin xyz="0 0 ${table_height + table_thickness}" rpy="0 0 0" />
     </joint>
 
