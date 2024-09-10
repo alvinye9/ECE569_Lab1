@@ -23,6 +23,7 @@ setup(
         'console_scripts': [
             'test = py_joint_pub.joint_publisher_test:main',
             'lissajous = py_joint_pub.joint_publisher_lissajous:main',
+            'pick-and-place = py_joint_pub.joint_publisher_bonus:main',
         ],
     },
 )
